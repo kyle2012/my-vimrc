@@ -93,11 +93,12 @@ vnoremap <Leader>" s""<Esc>P
 vnoremap <Leader>p s<C-r>0<Esc>
 noremap <Leader>o o<Esc>
 noremap <Leader><Enter> i<Enter><Esc>
+noremap <Leader>u :CtrlPMRU<CR>
 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+"inoremap <C-h> <Left>
+"inoremap <C-j> <Down>
+"inoremap <C-k> <Up>
+"inoremap <C-l> <Right>
 
 map <F3> :NERDTreeFind<CR>
 nmap <F8> :TagbarToggle<CR>
@@ -112,7 +113,8 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'ervandew/supertab'
 Plugin 'sheerun/vim-polyglot'
-Plugin 'Raimondi/delimitMate'
+"Plugin 'Raimondi/delimitMate'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'junegunn/vim-easy-align'
@@ -128,7 +130,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 "Plugin 'crusoexia/vim-monokai'
-Plugin 'vim-scripts/mru.vim'
+"there exists ctrlp mru support
+"Plugin 'vim-scripts/mru.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
@@ -149,7 +152,6 @@ filetype plugin indent on
 
 " nerdtree"
 map <C-n> :NERDTreeToggle<CR>
-map <leader>u :MRU<CR>
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
