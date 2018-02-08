@@ -41,10 +41,10 @@ let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_warning_symbol = '💩'
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
+"highlight link SyntasticErrorSign SignColumn
+"highlight link SyntasticWarningSign SignColumn
+"highlight link SyntasticStyleErrorSign SignColumn
+"highlight link SyntasticStyleWarningSign SignColumn
 
 let mapleader = "\<Space>"
 
@@ -84,8 +84,8 @@ noremap <C-k> <C-W>k<C-W>_
 noremap <C-h> <C-W>h<C-W>_
 noremap <C-l> <C-W>l<C-W>_
 
-noremap <leader>] g<C-]>
-noremap <leader>[ <C-w><C-v><C-]>
+noremap <leader>] :GtagsCursor<CR>
+"noremap <leader>[ <C-w><C-v><C-]>
 noremap <leader>' ciw''<Esc>P
 noremap <Leader>" ciw""<Esc>P
 vnoremap <Leader>' s''<Esc>P
@@ -141,7 +141,11 @@ Plugin 'haya14busa/incsearch.vim'
 Plugin 'haya14busa/incsearch-fuzzy.vim'
 Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'flazz/vim-colorschemes'
-"Plugin 'majutsushi/tagbar'
+Plugin 'neomake/neomake'
+Plugin 't9md/vim-choosewin'
+Plugin 'gtags.vim'
+"Plugin 'sbdchd/neoformat'
+Plugin 'majutsushi/tagbar'
 "Plugin 'haya14busa/incsearch.vim'
 "Plugin 'haya14busa/incsearch-easymotion.vim'
 
@@ -194,12 +198,19 @@ set runtimepath^=~/.vim/bundle/ag
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
 
+nmap - <Plug>(choosewin)
+"let g:choosewin_overlay_enable = 1
+
 if executable('ag')
   " note we extract the column as well as the file and line number
   set grepprg=ag\ --nogroup\ --nocolor\ --column
   set grepformat=%f:%l:%c%m
 endif
-
+call neomake#configure#automake('nw', 750)
+"augroup fmt
+  "autocmd!
+  "autocmd BufWritePre * undojoin | Neoformat
+"augroup END
 ca ag Ag!
 nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
 syntax on
@@ -212,7 +223,7 @@ syntax on
 "colorscheme lucid
 colorscheme lizard256
 "
-"set cursorline
+set cursorline
 "hi clear CursorLine
 "hi CursorLine gui=underline cterm=underline
 
