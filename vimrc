@@ -3,7 +3,9 @@ filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
 set splitright
+
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -45,6 +47,18 @@ let g:syntastic_style_warning_symbol = '💩'
 "highlight link SyntasticWarningSign SignColumn
 "highlight link SyntasticStyleErrorSign SignColumn
 "highlight link SyntasticStyleWarningSign SignColumn
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+let g:airline_theme='lucius'
 
 let mapleader = "\<Space>"
 
@@ -84,16 +98,20 @@ noremap <C-k> <C-W>k<C-W>_
 noremap <C-h> <C-W>h<C-W>_
 noremap <C-l> <C-W>l<C-W>_
 
-noremap <leader>] :GtagsCursor<CR>
-"noremap <leader>[ <C-w><C-v><C-]>
+"noremap <leader>] :GtagsCursor<CR>
+"noremap <leader>[ :cclose<CR>
+set cscopetag
+let GtagsCscope_Auto_Map = 0
+"noremap <leader>] g<C-]>
+noremap <leader>[ <C-w><C-v><C-]>
 noremap <leader>' ciw''<Esc>P
-noremap <Leader>" ciw""<Esc>P
-vnoremap <Leader>' s''<Esc>P
-vnoremap <Leader>" s""<Esc>P
-vnoremap <Leader>p s<C-r>0<Esc>
-noremap <Leader>o o<Esc>
-noremap <Leader><Enter> i<Enter><Esc>
-noremap <Leader>u :CtrlPMRU<CR>
+noremap <leader>" ciw""<Esc>P
+vnoremap <leader>' s''<Esc>P
+vnoremap <leader>" s""<Esc>P
+vnoremap <leader>p s<C-r>0<Esc>
+noremap <leader>o o<Esc>
+noremap <leader><Enter> i<Enter><Esc>
+noremap <leader>u :CtrlPMRU<CR>
 
 "inoremap <C-h> <Left>
 "inoremap <C-j> <Down>
@@ -126,6 +144,8 @@ Plugin 'tpope/vim-endwise'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'tpope/vim-projectionist'
 Plugin 'rking/ag.vim'
+"Plugin 'eugen0329/vim-esearch'
+"Plugin 'cyansprite/Extract'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -143,11 +163,12 @@ Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'neomake/neomake'
 Plugin 't9md/vim-choosewin'
-Plugin 'gtags.vim'
+"Plugin 'gtags.vim'
 "Plugin 'sbdchd/neoformat'
 Plugin 'majutsushi/tagbar'
 "Plugin 'haya14busa/incsearch.vim'
 "Plugin 'haya14busa/incsearch-easymotion.vim'
+Plugin 'kylechenDEV/gtags-cscope'
 
 map <F2> :NERDTreeToggle<CR>
 
@@ -212,7 +233,8 @@ call neomake#configure#automake('nw', 750)
   "autocmd BufWritePre * undojoin | Neoformat
 "augroup END
 ca ag Ag!
-nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
+nnoremap <silent>,c :let @* = expand("%:p").":".line('.')<cr>
+nnoremap <silent><leader>p :reg <bar> exec 'normal! "'.input('>').'p'<CR>
 syntax on
 "set background=dark
 "colorscheme janah
@@ -223,7 +245,7 @@ syntax on
 "colorscheme lucid
 colorscheme lizard256
 "
-set cursorline
+"set cursorline
 "hi clear CursorLine
 "hi CursorLine gui=underline cterm=underline
 
