@@ -1,6 +1,10 @@
 set nocompatible
 filetype off
 
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -22,7 +26,8 @@ set list
 set hlsearch
 set nowrap
 set foldenable
-set guifont=Monaco:h12
+"set guifont=Monaco:h12
+
 
 " set relative line numbers
 "set rnu
@@ -33,16 +38,17 @@ vnoremap < <gv
 
 let g:jsx_ext_required = 0 " allow JSX in normal JS files
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_vue_checkers = ['eslint', 'pug_lint_vue']
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
 "let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
+"let g:syntastic_error_symbol = '❌'
+"let g:syntastic_style_error_symbol = '⁉️'
+"let g:syntastic_warning_symbol = '⚠️'
+"let g:syntastic_style_warning_symbol = '💩'
 "highlight link SyntasticErrorSign SignColumn
 "highlight link SyntasticWarningSign SignColumn
 "highlight link SyntasticStyleErrorSign SignColumn
@@ -102,6 +108,7 @@ noremap <C-l> <C-W>l<C-W>_
 "noremap <leader>[ :cclose<CR>
 set cscopetag
 let GtagsCscope_Auto_Map = 0
+let GtagsCscope_Quiet = 1
 "noremap <leader>] g<C-]>
 noremap <leader>[ <C-w><C-v><C-]>
 noremap <leader>' ciw''<Esc>P
@@ -127,6 +134,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'ervandew/supertab'
@@ -169,6 +177,13 @@ Plugin 'majutsushi/tagbar'
 "Plugin 'haya14busa/incsearch.vim'
 "Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'kylechenDEV/gtags-cscope'
+Plugin 'ryanoasis/vim-devicons'
+
+"set guifont=Knack\ Regular\ Nerd\ Font\ Complete:11
+"set guifont=3270_Narrow_Nerd_Font_Complete_Mono:h12
+"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\:h11
+"set guifont=3270\ Nerd\ Font:h11
+let g:airline_powerline_fonts = 1
 
 map <F2> :NERDTreeToggle<CR>
 
@@ -219,6 +234,8 @@ set runtimepath^=~/.vim/bundle/ag
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
 
+let g:vim_markdown_folding_disabled = 1
+
 nmap - <Plug>(choosewin)
 "let g:choosewin_overlay_enable = 1
 
@@ -251,6 +268,4 @@ colorscheme lizard256
 
 hi Search ctermbg=118
 hi Search guibg=#A6E22E
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
-set encoding=utf-8
+
