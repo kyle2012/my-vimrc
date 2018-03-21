@@ -26,6 +26,8 @@ set list
 set hlsearch
 set nowrap
 set foldenable
+
+"instead of set guifont, set iterm2 fonts
 "set guifont=Monaco:h12
 
 
@@ -53,8 +55,9 @@ let g:syntastic_check_on_wq = 1
 "highlight link SyntasticWarningSign SignColumn
 "highlight link SyntasticStyleErrorSign SignColumn
 "highlight link SyntasticStyleWarningSign SignColumn
+
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tabs = 1
@@ -83,10 +86,7 @@ let g:ctrlp_user_command = {
       \ 'fallback': 'find %s -type f'
       \ }
 
-" leader y as yank to OS clipboard
-"vmap <leader>y "+y
 
-" leader leader as :nohlsearch
 map <leader><Esc> :nohlsearch<CR>
 
 " set leader w as :w
@@ -120,12 +120,6 @@ noremap <leader>o o<Esc>
 noremap <leader><Enter> i<Enter><Esc>
 noremap <leader>u :CtrlPMRU<CR>
 
-"inoremap <C-h> <Left>
-"inoremap <C-j> <Down>
-"inoremap <C-k> <Up>
-"inoremap <C-l> <Right>
-
-map <F3> :NERDTreeFind<CR>
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
@@ -134,7 +128,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'ervandew/supertab'
@@ -151,8 +147,8 @@ Plugin 'janko-m/vim-test'
 Plugin 'tpope/vim-endwise'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'tpope/vim-projectionist'
-Plugin 'rking/ag.vim'
-"Plugin 'eugen0329/vim-esearch'
+"Plugin 'rking/ag.vim'
+Plugin 'eugen0329/vim-esearch'
 "Plugin 'cyansprite/Extract'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
@@ -184,14 +180,21 @@ Plugin 'ryanoasis/vim-devicons'
 "set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\:h11
 "set guifont=3270\ Nerd\ Font:h11
 let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_ctrlp = 1
 
 map <F2> :NERDTreeToggle<CR>
+map <F3> :NERDTreeFind<CR>
 
 call vundle#end()
 filetype plugin indent on
 
-" nerdtree"
-map <C-n> :NERDTreeToggle<CR>
+"let g:NERDTreeHighlightCursorline = 0
+"let g:nerdtree_tabs_autofind = 1
+"let g:nerdtree_tabs_open_on_console_startup = 1
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"let NERDTreeWinSize = 30
+
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
@@ -215,41 +218,36 @@ function! s:config_easyfuzzymotion(...) abort
 endfunction
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+map <silent>n  <Plug>(incsearch-nohl-n)
+map <silent>N  <Plug>(incsearch-nohl-N)
+map <silent>*  <Plug>(incsearch-nohl-*)
+map <silent>#  <Plug>(incsearch-nohl-#)
+map <silent>g* <Plug>(incsearch-nohl-g*)
+map <silent>g# <Plug>(incsearch-nohl-g#)
 
 let NERDTreeShowHidden=1
 
-" column 80 indication"
-"let &colorcolumn=join(range(81,999),",")
-"let &colorcolumn="80".join(range(120,999),",")
-let &colorcolumn="80"
-"highlight ColorColumn ctermbg=235 guibg=#2c2d27
-
 set runtimepath^=~/.vim/bundle/ag
-let g:ag_working_path_mode="r"
-let g:ag_highlight=1
+"let g:ag_working_path_mode="r"
+"let g:ag_highlight=1
 
 let g:vim_markdown_folding_disabled = 1
 
 nmap - <Plug>(choosewin)
 "let g:choosewin_overlay_enable = 1
 
-if executable('ag')
+"if executable('ag')
   " note we extract the column as well as the file and line number
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
-  set grepformat=%f:%l:%c%m
-endif
+  "set grepprg=ag\ --nogroup\ --nocolor\ --column
+  "set grepformat=%f:%l:%c%m
+"endif
+"ca ag Ag!
+
 call neomake#configure#automake('nw', 750)
 "augroup fmt
   "autocmd!
   "autocmd BufWritePre * undojoin | Neoformat
 "augroup END
-ca ag Ag!
 nnoremap <silent>,c :let @* = expand("%:p").":".line('.')<cr>
 nnoremap <silent><leader>p :reg <bar> exec 'normal! "'.input('>').'p'<CR>
 syntax on
@@ -261,11 +259,19 @@ syntax on
 "colorscheme base
 "colorscheme lucid
 colorscheme lizard256
+
+" column 80 indication"
+"let &colorcolumn=join(range(81,999),",")
+"let &colorcolumn="80".join(range(120,999),",")
+let &colorcolumn="80"
+"highlight ColorColumn ctermbg=235 guibg=#2c2d27
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
 "
 "set cursorline
 "hi clear CursorLine
 "hi CursorLine gui=underline cterm=underline
 
 hi Search ctermbg=118
-hi Search guibg=#A6E22E
+"hi Search guibg=#A6E22E
 
