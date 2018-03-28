@@ -257,8 +257,9 @@ syntax on
 "colorscheme soruby
 "colorscheme railscasts
 "colorscheme base
+colorscheme dracula
 "colorscheme lucid
-colorscheme lizard256
+"colorscheme lizard256
 
 " column 80 indication"
 "let &colorcolumn=join(range(81,999),",")
