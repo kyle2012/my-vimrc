@@ -96,7 +96,8 @@ noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 
 " reload vim
-map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+"map <silent> <leader>r :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent> <leader>r :edit!<CR>
 
 " set mapping to navigate between open split windows
 noremap <C-J> <C-W>j<C-W>_
@@ -173,6 +174,7 @@ Plugin 'majutsushi/tagbar'
 "Plugin 'haya14busa/incsearch.vim'
 "Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'kylechenDEV/gtags-cscope'
+Plugin 'kylechenDEV/vsearch'
 Plugin 'ryanoasis/vim-devicons'
 
 "set guifont=Knack\ Regular\ Nerd\ Font\ Complete:11
@@ -250,22 +252,24 @@ call neomake#configure#automake('nw', 750)
 "augroup END
 nnoremap <silent>,c :let @* = expand("%:p").":".line('.')<cr>
 nnoremap <silent><leader>p :reg <bar> exec 'normal! "'.input('>').'p'<CR>
+
 syntax on
 "set background=dark
 "colorscheme janah
-"colorscheme molokai
+colorscheme molokai
 "colorscheme soruby
 "colorscheme railscasts
 "colorscheme base
-colorscheme dracula
+"colorscheme dracula
 "colorscheme lucid
 "colorscheme lizard256
+"colorscheme Monokai
 
 " column 80 indication"
 "let &colorcolumn=join(range(81,999),",")
 "let &colorcolumn="80".join(range(120,999),",")
 let &colorcolumn="80"
-"highlight ColorColumn ctermbg=235 guibg=#2c2d27
+"highlight ColorColumn ctermbg=0 guibg=#2c2c27
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 "
