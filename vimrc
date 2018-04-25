@@ -138,7 +138,7 @@ Plugin 'ervandew/supertab'
 Plugin 'sheerun/vim-polyglot'
 "Plugin 'Raimondi/delimitMate'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'plasticboy/vim-markdown'
@@ -256,12 +256,12 @@ nnoremap <silent><leader>p :reg <bar> exec 'normal! "'.input('>').'p'<CR>
 syntax on
 "set background=dark
 "colorscheme janah
-colorscheme molokai
+"colorscheme molokai
 "colorscheme soruby
 "colorscheme railscasts
 "colorscheme base
 "colorscheme dracula
-"colorscheme lucid
+colorscheme lucid
 "colorscheme lizard256
 "colorscheme Monokai
 
@@ -271,6 +271,8 @@ colorscheme molokai
 let &colorcolumn="80"
 "highlight ColorColumn ctermbg=0 guibg=#2c2c27
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
+let NERDTreeHighlightCursorline=0
 
 "
 "set cursorline
