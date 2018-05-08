@@ -18,7 +18,6 @@ call vundle#begin()
 set clipboard=unnamed
 
 syntax enable
-set background=dark
 set expandtab
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set number
@@ -265,6 +264,7 @@ colorscheme lucid
 "colorscheme lizard256
 "colorscheme Monokai
 
+set background=dark
 " column 80 indication"
 "let &colorcolumn=join(range(81,999),",")
 "let &colorcolumn="80".join(range(120,999),",")
