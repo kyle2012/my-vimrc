@@ -273,6 +273,9 @@ let &colorcolumn="80"
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 let NERDTreeHighlightCursorline=0
+let NERDTreeRespectWildIgnore = 1
+"let NERDTreeIgnore = ['\.pyc$']
+
 
 "
 "set cursorline
