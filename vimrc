@@ -175,6 +175,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kylechenDEV/gtags-cscope'
 Plugin 'kylechenDEV/vsearch'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'kylechenDEV/vim-wild-ignore'
 
 "set guifont=Knack\ Regular\ Nerd\ Font\ Complete:11
 "set guifont=3270_Narrow_Nerd_Font_Complete_Mono:h12
