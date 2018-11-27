@@ -1,3 +1,4 @@
 # my-vimrc
-involved neovim plugins(neomake...)
-best to use neovim, then add vim to neovim's init.vim
+involved neovim plugins(neomake...) . 
+It's better to use neovim . 
+see https://neovim.io/ . 
