@@ -9,6 +9,7 @@ set encoding=utf-8
 set rtp+=~/.vim/bundle/Vundle.vim
 
 set splitright
+set splitbelow
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -25,6 +26,8 @@ set list
 set hlsearch
 set nowrap
 set foldenable
+
+set nocscopeverbose
 
 "instead of set guifont, set iterm2 fonts
 "set guifont=Monaco:h12
@@ -66,6 +69,8 @@ let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+autocmd BufWritePost * GitGutter
+
 let g:airline_theme='lucius'
 
 let mapleader = "\<Space>"
@@ -85,6 +90,11 @@ let g:ctrlp_user_command = {
       \ 'fallback': 'find %s -type f'
       \ }
 
+let g:go_term_mode = "split"
+augroup completion_preview_close
+  autocmd!
+  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
+augroup END
 
 map <leader><Esc> :nohlsearch<CR>
 
@@ -125,7 +135,17 @@ let g:tagbar_autofocus = 1
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plugin 'zchee/deoplete-go', { 'do': 'make'}
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -134,7 +154,7 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'ervandew/supertab'
-Plugin 'sheerun/vim-polyglot'
+"Plugin 'sheerun/vim-polyglot'
 "Plugin 'Raimondi/delimitMate'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -175,6 +195,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kylechenDEV/gtags-cscope'
 Plugin 'kylechenDEV/vsearch'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'fatih/vim-go'
 
 "set guifont=Knack\ Regular\ Nerd\ Font\ Complete:11
 "set guifont=3270_Narrow_Nerd_Font_Complete_Mono:h12
@@ -183,8 +204,8 @@ Plugin 'ryanoasis/vim-devicons'
 let g:airline_powerline_fonts = 1
 let g:webdevicons_enable_ctrlp = 1
 
-map <F2> :NERDTreeToggle<CR>
-map <F3> :NERDTreeFind<CR>
+map <leader>2 :NERDTreeToggle<CR>
+map <leader>3 :NERDTreeFind<CR>
 
 call vundle#end()
 filetype plugin indent on
