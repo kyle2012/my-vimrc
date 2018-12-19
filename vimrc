@@ -195,7 +195,11 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kylechenDEV/gtags-cscope'
 Plugin 'kylechenDEV/vsearch'
 Plugin 'ryanoasis/vim-devicons'
+<<<<<<< HEAD
 Plugin 'fatih/vim-go'
+=======
+Plugin 'kylechenDEV/vim-wild-ignore'
+>>>>>>> 5b09cfd001aad076ce394bb3fb220fbcd6470a56
 
 "set guifont=Knack\ Regular\ Nerd\ Font\ Complete:11
 "set guifont=3270_Narrow_Nerd_Font_Complete_Mono:h12
@@ -294,6 +298,9 @@ let &colorcolumn="80"
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 let NERDTreeHighlightCursorline=0
+let NERDTreeRespectWildIgnore = 1
+"let NERDTreeIgnore = ['\.pyc$']
+
 
 "
 "set cursorline
