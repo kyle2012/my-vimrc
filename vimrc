@@ -29,6 +29,8 @@ set foldenable
 
 set nocscopeverbose
 
+set nolist
+
 "instead of set guifont, set iterm2 fonts
 "set guifont=Monaco:h12
 
