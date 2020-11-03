@@ -10,10 +10,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 set splitright
 set splitbelow
+set autoread
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
 call vundle#begin()
 
 set clipboard=unnamed
@@ -42,15 +44,16 @@ set nolist
 vnoremap > >gv
 vnoremap < <gv
 
-let g:jsx_ext_required = 0 " allow JSX in normal JS files
+let g:jsx_ext_required = 1 " allow JSX in normal JS files
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_vue_checkers = ['eslint', 'pug_lint_vue']
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {'mode':'passive'}
 "let g:syntastic_error_symbol = '❌'
 "let g:syntastic_style_error_symbol = '⁉️'
 "let g:syntastic_warning_symbol = '⚠️'
@@ -73,7 +76,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 autocmd BufWritePost * GitGutter
 
-let g:airline_theme='lucius'
+let g:airline_theme='base16'
 
 let mapleader = "\<Space>"
 
@@ -182,10 +185,6 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-fuzzy.vim'
-Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'neomake/neomake'
 Plugin 't9md/vim-choosewin'
@@ -198,7 +197,6 @@ Plugin 'kylechenDEV/gtags-cscope'
 Plugin 'kylechenDEV/vsearch'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'fatih/vim-go'
-Plugin 'kylechenDEV/vim-wild-ignore'
 
 "set guifont=Knack\ Regular\ Nerd\ Font\ Complete:11
 "set guifont=3270_Narrow_Nerd_Font_Complete_Mono:h12
@@ -220,28 +218,32 @@ filetype plugin indent on
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "let NERDTreeWinSize = 30
 
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+"Plugin 'easymotion/vim-easymotion'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-fuzzy.vim'
+"Plugin 'haya14busa/incsearch-easymotion.vim'
+"function! s:incsearch_config(...) abort
+  "return incsearch#util#deepextend(deepcopy({
+  "\   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  "\   'keymap': {
+  "\     "\<CR>": '<Over>(easymotion)'
+  "\   },
+  "\   'is_expr': 0
+  "\ }), get(a:, 1, {}))
+"endfunction
+"noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+"noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+"noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+"function! s:config_easyfuzzymotion(...) abort
+  "return extend(copy({
+  "\   'converters': [incsearch#config#fuzzyword#converter()],
+  "\   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  "\   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  "\   'is_expr': 0,
+  "\   'is_stay': 1
+  "\ }), get(a:, 1, {}))
+"endfunction
+"noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 let g:incsearch#auto_nohlsearch = 1
 map <silent>n  <Plug>(incsearch-nohl-n)
 map <silent>N  <Plug>(incsearch-nohl-N)
@@ -252,7 +254,7 @@ map <silent>g# <Plug>(incsearch-nohl-g#)
 
 let NERDTreeShowHidden=1
 
-set runtimepath^=~/.vim/bundle/ag
+"set runtimepath^=~/.vim/bundle/ag
 "let g:ag_working_path_mode="r"
 "let g:ag_highlight=1
 
@@ -273,7 +275,7 @@ call neomake#configure#automake('nw', 750)
   "autocmd!
   "autocmd BufWritePre * undojoin | Neoformat
 "augroup END
-nnoremap <silent>,c :let @* = expand("%:p").":".line('.')<cr>
+nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
 nnoremap <silent><leader>p :reg <bar> exec 'normal! "'.input('>').'p'<CR>
 
 syntax on
@@ -284,9 +286,10 @@ syntax on
 "colorscheme railscasts
 "colorscheme base
 "colorscheme dracula
-colorscheme lucid
-"colorscheme lizard256
+"colorscheme lucid
 "colorscheme Monokai
+"colorscheme lizard256
+colorscheme codedark
 
 set background=dark
 " column 80 indication"
@@ -297,9 +300,6 @@ let &colorcolumn="80"
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 let NERDTreeHighlightCursorline=0
-let NERDTreeRespectWildIgnore = 1
-"let NERDTreeIgnore = ['\.pyc$']
-
 
 "
 "set cursorline
@@ -308,4 +308,3 @@ let NERDTreeRespectWildIgnore = 1
 
 hi Search ctermbg=118
 "hi Search guibg=#A6E22E
-
